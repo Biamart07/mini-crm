@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
+//Efeito Fade-out para as mensagens de aviso
 document.addEventListener('DOMContentLoaded', () => {
     
     // Pega o elemento da mensagem de feedback pelo ID

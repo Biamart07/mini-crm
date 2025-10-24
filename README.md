@@ -2,9 +2,12 @@
 
 ## 🎯 Objetivo do Projeto
 
-Este projeto foi desenvolvido como um exercício prático para solidificar os conhecimentos em **Back-End com PHP e MySQL (Banco de Dados)**, focando na implementação completa de um sistema **CRUD (Create, Read, Update, Delete)**.
+Este projeto foi desenvolvido como um exercício prático para solidificar os conhecimentos em **Back-End com PHP e MySQL (Banco de Dados)**, focando na implementação completa de um sistema **CRUD (Create, Read, Update, Delete)** de forma segura e com atenção à experiência do usuário (UX).
 
-**Principal Destaque (Diferencial Técnico):** A interface utiliza um front-end moderno (Tailwind CSS) e implementa a função de **Edição (Update)** através de um **Modal assíncrono (AJAX / JavaScript puro)**. Isso demonstra a capacidade de comunicar o Front-End com o Back-End de forma otimizada e sem a necessidade de recarregar a página.
+**Principais Destaques para o Portfólio:**
+1.  **Segurança e Integridade de Dados (Back-End):** Uso obrigatório do padrão **PDO** com *Prepared Statements* para prevenir **SQL Injection**.
+2.  **Experiência de Usuário Otimizada (Front-End):** O recurso de **Edição (Update)** é implementado de forma assíncrona (via **AJAX / Fetch API**), preenchendo um Modal sem recarregar a página, resultando em uma navegação fluida.
+3.  **Polimento da Interface:** Mensagens de sucesso/erro que **desaparecem automaticamente** após 5 segundos, garantindo uma UI limpa e moderna.
 
 ---
 
@@ -14,44 +17,62 @@ Este projeto foi desenvolvido como um exercício prático para solidificar os co
 * **PHP (Linguagem):** Lógica do servidor, roteamento e funções CRUD.
 * **MySQL/PDO:** Banco de dados para persistência de dados, com uso de *Prepared Statements* para segurança contra SQL Injection.
 
-**Front-End/Design:**
-* **HTML5:** Estrutura semântica e acessível.
-* **Tailwind CSS:** Framework utilitário para a estilização rápida e responsiva.
-* **JavaScript (Puro):** Responsável por manipular o DOM, exibir o modal de edição e gerenciar a comunicação assíncrona (AJAX / Fetch API) com o Back-End.
+**Front-End/Design & Interatividade:**
+* **HTML5:** Estrutura semântica e acessível (A11y).
+* **Tailwind CSS:** Framework utilitário para estilização **Mobile-First** e responsiva.
+* **JavaScript (Puro / Fetch API):** Responsável por manipular o DOM, gerenciar o Modal de Edição e fazer a comunicação assíncrona (AJAX) para o UPDATE.
 
 ---
 
-## ⚙️ Funcionalidades
+## ⚙️ Funcionalidades CRUD Implementadas
 
-O Mini-CRM suporta as 4 operações fundamentais de persistência de dados:
+O Mini-CRM suporta todas as 4 operações fundamentais (**C-R-U-D**):
 
-1.  **Criar (Create):** Formulário de adição de novos clientes com validação de campos obrigatórios (`NOT NULL` e `UNIQUE` para e-mail no DB).
-2.  **Ler (Read):** Exibição de todos os clientes em uma tabela responsiva com ordenação.
-3.  **Atualizar (Update) - Destaque!:** Edição dos dados de um cliente através de um Modal. O preenchimento do formulário no modal é feito via requisição **AJAX (JSON)** para melhor experiência do usuário (sem recarregar a página).
-4.  **Deletar (Delete):** Remoção instantânea de um cliente com confirmação via Front-End.
+| Operação | Descrição | Implementação Técnica |
+| :--- | :--- | :--- |
+| **Criar (Create)** | Adiciona um novo registro de cliente. | `POST` para `clientes.php`. Usa `filter_input` e *Prepared Statements*. |
+| **Ler (Read)** | Exibe a lista completa de clientes. | `SELECT` e laço `foreach` no `index.php`. Uso de `htmlspecialchars` para prevenção de XSS. |
+| **Atualizar (Update)** | Edita os dados de um cliente existente. | Fluxo **AJAX (GET)** para buscar o JSON -> Preenchimento do Modal -> **POST** para salvar no `clientes.php`. |
+| **Deletar (Delete)** | Remove um registro permanentemente. | Requisição `GET` com ID validado e `DELETE` seguro no Back-End. |
+
+---
+
+## ✨ Melhorias de UX e Boas Práticas
+
+* **Validação em Camadas:** Validações de campos (`NOT NULL` e `UNIQUE`) no nível do banco de dados (MySQL) e no nível da aplicação (PHP).
+* **Tratamento de Erros:** Captura de exceções PDO para tratamento de erros comuns, como a duplicação de e-mail.
+* **Design Responsivo:** Layout totalmente funcional e otimizado para dispositivos móveis (`overflow-x-auto` para a tabela e classes de responsividade do Tailwind CSS).
+* **Feedback Inteligente:** Mensagens de sucesso ou erro que **desaparecem automaticamente** após 5 segundos, usando `setTimeout` no JavaScript.
 
 ---
 
 ## 🚀 Como Executar o Projeto Localmente
 
-Siga os passos abaixo para colocar o Mini-CRM em funcionamento na sua máquina.
-
 ### Pré-requisitos
-Você precisa ter um ambiente de desenvolvimento PHP instalado, como:
-* **XAMPP, WAMP, ou MAMP.**
+* **XAMPP, WAMP, ou MAMP** (com Apache e MySQL em execução).
 
-### 1. Configuração da Base de Dados
+### Instalação e Configuração
 
-1.  Inicie o Apache e o MySQL no seu painel de controle do XAMPP.
-2.  Acesse o **phpMyAdmin** (geralmente em `http://localhost/phpmyadmin`).
-3.  Crie um novo banco de dados chamado **`mini_crm`**.
-4.  Execute a seguinte instrução SQL na aba SQL do banco `mini_crm`:
+1.  **Clone o Repositório:**
+    ```bash
+    git clone [LINK DO SEU REPOSITÓRIO] mini-crm
+    ```
+2.  **Mova para htdocs:** Copie a pasta `mini-crm` para o diretório `htdocs` do seu XAMPP.
+3.  **Configuração do Banco (MySQL):**
+    * Acesse o phpMyAdmin.
+    * Crie o banco de dados chamado **`mini_crm`**.
+    * Execute o SQL para criar a tabela `clientes`:
+        ```sql
+        CREATE TABLE clientes (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            nome VARCHAR(100) NOT NULL,
+            email VARCHAR(100) UNIQUE NOT NULL,
+            telefone VARCHAR(20),
+            data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
+        ```
+4.  **Verifique a Conexão:** O arquivo `db_config.php` está configurado para o padrão do XAMPP (`user='root', pass=''`).
 
-```sql
-CREATE TABLE clientes (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100) UNIQUE NOT NULL,
-    telefone VARCHAR(20),
-    data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+### Acessar a Aplicação
+
+Abra seu navegador e acesse: `http://localhost/mini-crm/index.php`

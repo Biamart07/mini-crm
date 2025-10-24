@@ -52,7 +52,7 @@ $clientes = listarClientes();
 
                 if ($message): // Se houver mensagem para exibir
             ?>
-                <div class="p-4 mb-4 border-l-4 <?= $class ?> rounded-md" role="alert">
+                <div id="feedback-message" class="p-4 mb-4 border-l-4 <?= $class ?> rounded-md" role="alert">
                     <p class="font-bold">Aviso do Sistema</p>
                     <p><?= htmlspecialchars($message) ?></p>
                 </div>

@@ -73,3 +73,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // Pega o elemento da mensagem de feedback pelo ID
+    const feedbackMessage = document.getElementById('feedback-message');
+    
+    // Verifica se a mensagem existe na página
+    if (feedbackMessage) {
+        
+        // Define o tempo em milissegundos (ex: 5000ms = 5 segundos)
+        const tempoParaDesaparecer = 5000; 
+
+        // Usa setTimeout para executar uma função após o tempo definido
+        setTimeout(() => {
+            
+            // 🔑 O que faz a mágica: Remove a classe 'p-4' e adiciona 'opacity-0' 
+            // e 'transition-opacity' para iniciar um efeito de fade out suave.
+            feedbackMessage.classList.remove('p-4');
+            feedbackMessage.classList.add('opacity-0', 'transition-opacity', 'duration-500');
+
+            // Depois do fade out (500ms), remove o elemento completamente para limpar o espaço
+            setTimeout(() => {
+                feedbackMessage.remove(); // Remove o elemento do HTML
+            }, 500); // Espera 500ms para o efeito de transição terminar
+
+        }, tempoParaDesaparecer);
+    }
+});

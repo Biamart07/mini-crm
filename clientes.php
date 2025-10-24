@@ -126,7 +126,7 @@ function buscarClientePorId($id) {
     global $pdo;
 
     try {
-        $sql = "SELECT id, nome, email, telefone FROM cliente WHERE id = ?";
+        $sql = "SELECT id, nome, email, telefone FROM clientes WHERE id = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id]);
         // fetch() retorna a primeira (e única) linha como um array associativo

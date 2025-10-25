@@ -1,78 +1,87 @@
-# 🗄️ Mini-CRM: Sistema de Gestão de Clientes (CRUD PHP + Frontend Moderno)
+# 🗄️ Mini-CRM: Sistema de Gestão de Clientes (CRUD PHP + Frontend Completo)
 
 ## 🎯 Objetivo do Projeto
 
-Este projeto foi desenvolvido como um exercício prático para solidificar os conhecimentos em **Back-End com PHP e MySQL (Banco de Dados)**, focando na implementação completa de um sistema **CRUD (Create, Read, Update, Delete)** de forma segura e com atenção à experiência do usuário (UX).
+Este projeto foi desenvolvido como um sistema de gestão de clientes completo, focado na prática do **Full-Stack (PHP/MySQL)** para persistência de dados e na criação de uma interface de usuário moderna e segura com **Tailwind CSS e JavaScript**.
 
-**Principais Destaques para o Portfólio:**
-1.  **Segurança e Integridade de Dados (Back-End):** Uso obrigatório do padrão **PDO** com *Prepared Statements* para prevenir **SQL Injection**.
-2.  **Experiência de Usuário Otimizada (Front-End):** O recurso de **Edição (Update)** é implementado de forma assíncrona (via **AJAX / Fetch API**), preenchendo um Modal sem recarregar a página, resultando em uma navegação fluida.
-3.  **Polimento da Interface:** Mensagens de sucesso/erro que **desaparecem automaticamente** após 5 segundos, garantindo uma UI limpa e moderna.
-
----
-
-## 🛠️ Tecnologias Utilizadas
-
-**Back-End/Lógica:**
-* **PHP (Linguagem):** Lógica do servidor, roteamento e funções CRUD.
-* **MySQL/PDO:** Banco de dados para persistência de dados, com uso de *Prepared Statements* para segurança contra SQL Injection.
-
-**Front-End/Design & Interatividade:**
-* **HTML5:** Estrutura semântica e acessível (A11y).
-* **Tailwind CSS:** Framework utilitário para estilização **Mobile-First** e responsiva.
-* **JavaScript (Puro / Fetch API):** Responsável por manipular o DOM, gerenciar o Modal de Edição e fazer a comunicação assíncrona (AJAX) para o UPDATE.
+O objetivo principal foi demonstrar domínio sobre:
+1.  **Ciclo de Vida CRUD:** Implementação completa das quatro operações básicas de manipulação de dados.
+2.  **Segurança e Autenticação:** Proteção de rotas com login seguro e hashing de senhas.
+3.  **Design e Arquitetura:** Desenvolvimento responsivo (*Mobile-First*) e uso de comunicação assíncrona (AJAX).
 
 ---
 
-## ⚙️ Funcionalidades CRUD Implementadas
+## 🛡️ Destaques Técnicos e Segurança
 
-O Mini-CRM suporta todas as 4 operações fundamentais (**C-R-U-D**):
+Este projeto incorpora as seguintes melhores práticas, que são essenciais para um ambiente de produção:
 
-| Operação | Descrição | Implementação Técnica |
+* **Autenticação Segura (Login/Logout):**
+    * Uso de **Sessões PHP** para controle de acesso e proteção da página principal (`index.php`).
+    * Armazenamento de senhas via **`password_hash()`** e verificação via **`password_verify()`**, prevenindo a exposição de senhas em caso de vazamento do banco de dados.
+* **Prevenção contra SQL Injection:** Todas as interações com o banco de dados (CREATE, UPDATE, DELETE) utilizam **Prepared Statements (PDO)**, garantindo que dados de entrada do usuário sejam tratados separadamente dos comandos SQL.
+* **Estrutura da Aplicação:** Separação lógica entre a Conexão (`db_config.php`), o Controlador (`auth.php`, `clientes.php`) e as Views (`index.php`, `login.php`).
+
+---
+
+## 🎨 Funcionalidades Front-End (UX/Design)
+
+* **CRUD Completo e Fluido:** Implementação das operações C.R.U.D.
+* **Edição (Update) com Modal AJAX:** O preenchimento do formulário de edição no Modal é feito de forma assíncrona via **Fetch API (JSON)**, proporcionando uma experiência de usuário sem recarregamento de página.
+* **Design Responsivo e Navbar:**
+    * Estilização **Mobile-First** utilizando **Tailwind CSS**.
+    * Inclusão de um **Menu Hamburguer** totalmente funcional (via JavaScript) para navegação intuitiva em dispositivos móveis.
+* **Feedback Inteligente:** Mensagens de sucesso ou erro (após criar, editar ou deletar) são exibidas e **desaparecem automaticamente** após 5 segundos, garantindo que a UI se mantenha limpa.
+
+---
+
+## ⚙️ Tecnologias Utilizadas
+
+| Camada | Tecnologia | Propósito |
 | :--- | :--- | :--- |
-| **Criar (Create)** | Adiciona um novo registro de cliente. | `POST` para `clientes.php`. Usa `filter_input` e *Prepared Statements*. |
-| **Ler (Read)** | Exibe a lista completa de clientes. | `SELECT` e laço `foreach` no `index.php`. Uso de `htmlspecialchars` para prevenção de XSS. |
-| **Atualizar (Update)** | Edita os dados de um cliente existente. | Fluxo **AJAX (GET)** para buscar o JSON -> Preenchimento do Modal -> **POST** para salvar no `clientes.php`. |
-| **Deletar (Delete)** | Remove um registro permanentemente. | Requisição `GET` com ID validado e `DELETE` seguro no Back-End. |
+| **Back-End** | PHP | Lógica de autenticação e controle de fluxo. |
+| **Banco de Dados** | MySQL/PDO | Persistência de dados segura. |
+| **Estilização** | Tailwind CSS | Desenvolvimento rápido e responsivo da interface. |
+| **Interatividade** | JavaScript (Puro) | Modal, Menu Hamburguer e Requisições AJAX. |
 
 ---
 
-## ✨ Melhorias de UX e Boas Práticas
-
-* **Validação em Camadas:** Validações de campos (`NOT NULL` e `UNIQUE`) no nível do banco de dados (MySQL) e no nível da aplicação (PHP).
-* **Tratamento de Erros:** Captura de exceções PDO para tratamento de erros comuns, como a duplicação de e-mail.
-* **Design Responsivo:** Layout totalmente funcional e otimizado para dispositivos móveis (`overflow-x-auto` para a tabela e classes de responsividade do Tailwind CSS).
-* **Feedback Inteligente:** Mensagens de sucesso ou erro que **desaparecem automaticamente** após 5 segundos, usando `setTimeout` no JavaScript.
-
----
-
-## 🚀 Como Executar o Projeto Localmente
+## 🚀 Como Iniciar o Projeto
 
 ### Pré-requisitos
-* **XAMPP, WAMP, ou MAMP** (com Apache e MySQL em execução).
+* Ambiente **XAMPP/WAMP/MAMP** (com Apache e MySQL ativos).
 
-### Instalação e Configuração
+### 1. Configuração do Banco de Dados
 
-1.  **Clone o Repositório:**
-    ```bash
-    git clone [LINK DO SEU REPOSITÓRIO] mini-crm
+1.  Crie um banco de dados chamado **`mini_crm`** no phpMyAdmin.
+2.  Execute as instruções SQL para criar as duas tabelas necessárias:
+
+    ```sql
+    -- Tabela de Clientes (Dados da Aplicação)
+    CREATE TABLE clientes (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        telefone VARCHAR(20),
+        data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    -- Tabela de Usuários (Autenticação)
+    CREATE TABLE usuarios (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nome VARCHAR(100) NOT NULL,
+        email VARCHAR(100) UNIQUE NOT NULL,
+        senha VARCHAR(255) NOT NULL, -- Para o hash seguro
+        data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
     ```
-2.  **Mova para htdocs:** Copie a pasta `mini-crm` para o diretório `htdocs` do seu XAMPP.
-3.  **Configuração do Banco (MySQL):**
-    * Acesse o phpMyAdmin.
-    * Crie o banco de dados chamado **`mini_crm`**.
-    * Execute o SQL para criar a tabela `clientes`:
-        ```sql
-        CREATE TABLE clientes (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            nome VARCHAR(100) NOT NULL,
-            email VARCHAR(100) UNIQUE NOT NULL,
-            telefone VARCHAR(20),
-            data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );
-        ```
-4.  **Verifique a Conexão:** O arquivo `db_config.php` está configurado para o padrão do XAMPP (`user='root', pass=''`).
 
-### Acessar a Aplicação
+3.  **Crie um Usuário de Teste:**
+    * Use um script PHP temporário para gerar o hash da senha (ex: `password_hash("suasenha", PASSWORD_DEFAULT)`).
+    * Insira o registro diretamente na tabela `usuarios` no phpMyAdmin, usando o **hash** gerado no campo `senha`.
+    
+### 2. Acessar a Aplicação
 
-Abra seu navegador e acesse: `http://localhost/mini-crm/index.php`
+1.  Coloque a pasta `mini-crm` no diretório `htdocs` do seu servidor local.
+2.  Acesse: `http://localhost/mini-crm/login.php`
+3.  Faça login com o e-mail e senha do usuário que você criou (a senha que você usou para gerar o hash).
+

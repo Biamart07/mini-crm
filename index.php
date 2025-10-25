@@ -61,7 +61,7 @@ $clientes = listarClientes();
 
                 <div class="hidden sm:ml-6 sm:flex sm:items-center">
                     <span class="text-gray-200 text-sm mr-4">
-                        Olá, <span class="font-semibold"><?= htmlspecialchars($nome_usuario) ?></span>
+                        Bem-vindo(a), <span class="font-semibold"><?= htmlspecialchars($nome_usuario) ?></span>
                     </span>
 
                     <a href="logout.php"

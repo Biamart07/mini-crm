@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+    
 
 });
 
@@ -100,5 +101,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500); // Espera 500ms para o efeito de transição terminar
 
         }, tempoParaDesaparecer);
+    }
+
+    // --- Lógica do Menu Hamburguer ---
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamburguerIcon = document.getElementById('hamburguer-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            
+            // 1. Alterna a visibilidade do menu (adiciona/remove a classe 'hidden')
+            mobileMenu.classList.toggle('hidden');
+            
+            // 2. Alterna os ícones
+            const isMenuOpen = !mobileMenu.classList.contains('hidden');
+            
+            if (isMenuOpen) {
+                // Menu está aberto: Mostra o ícone de 'fechar' (X)
+                hamburguerIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'true');
+            } else {
+                // Menu está fechado: Mostra o ícone 'hamburguer' (3 linhas)
+                hamburguerIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                mobileMenuButton.setAttribute('aria-expanded', 'false');
+            }
+        });
     }
 });

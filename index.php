@@ -71,6 +71,40 @@ $clientes = listarClientes();
                         Logout
                     </a>
                 </div>
+
+                <div class="flex items-center sm:hidden">
+                    <button id="mobile-menu-button" type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md 
+                                   text-indigo-200 hover:text-white hover:bg-indigo-700 
+                                   focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Abrir menu principal</span>
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path id="hamburguer-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden sm:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.php" class="bg-indigo-700 text-white block px-3 py-2 rounded-md text-base font-medium">
+                    Clientes
+                </a>
+                <a href="#" class="text-gray-300 hover:bg-indigo-500 hover:text-white block px-3 py-2 rounded-md text-base font-medium cursor-not-allowed">
+                    Relatórios (Futuro)
+                </a>
+                
+                <div class="border-t border-indigo-700 pt-3">
+                    <span class="text-gray-300 block px-3 py-2 text-sm font-medium">Logado como: <?= htmlspecialchars($nome_usuario) ?></span>
+                    <a href="logout.php" 
+                       class="mt-1 w-full flex justify-center py-2 px-4 border border-transparent 
+                              rounded-md text-base font-medium text-white bg-red-600 hover:bg-red-700">
+                        Sair (Logout)
+                    </a>
+                </div>
             </div>
         </div>
     </nav>

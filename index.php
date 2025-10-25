@@ -36,20 +36,46 @@ $clientes = listarClientes();
 </head>
 
 <body class="bg-gray-100 p-8 md:p-4">
+    <nav class="bg-indigo-600 shadow-lg sticky top-0 z-10 mb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="shrink-0 flex items-center">
+                        <a href="index.php" class="text-white text-xl font-extrabold tracking-wider">
+                            Mini-CRM
+                        </a>
+                    </div>
 
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                        <a href="index.php" class="border-b-2 border-transparent text-white hover:border-white px-3 py-5 text-sm font-medium transition duration-150">
+                            Clientes (Atual)
+                        </a>
+                        <a href="#" class="border-b-2 border-transparent text-gray-300 hover:border-gray-300 hover:text-white px-3 py-5 text-sm font-medium cursor-not-allowed">
+                            Relatórios (Futuro)
+                        </a>
+                        <a href="#" class="border-b-2 border-transparent text-gray-300 hover:border-gray-300 hover:text-white px-3 py-5 text-sm font-medium cursor-not-allowed">
+                            Configurações (Futuro)
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <span class="text-gray-200 text-sm mr-4">
+                        Olá, <span class="font-semibold"><?= htmlspecialchars($nome_usuario) ?></span>
+                    </span>
+
+                    <a href="logout.php"
+                        class="py-2 px-4 border border-transparent rounded-md shadow-sm 
+                              text-sm font-medium text-indigo-100 bg-red-600 
+                              hover:bg-red-700 transition duration-150 ease-in-out">
+                        Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <div class="max-w-4xl mx-auto">
-        <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">
-            Gestão de Clientes (CRUD PHP)
-        </h1>
-
-        <nav class="flex items-center space-x-4">
-            <span class="text-sm text-gray-600">Olá, <?= htmlspecialchars($nome_usuario) ?></span>
-            <a href="logout.php"
-                class="py-1 px-3 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition">
-                Sair (Logout)
-            </a>
-        </nav>
 
         <section class="bg-white shadow-lg rounded-xl p-6 mb-10 border border-indigo-200">
             <h2 class="text-2xl font-semibold text-indigo-600 mb-6 border-b pb-2">

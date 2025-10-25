@@ -22,14 +22,9 @@ if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado'] === true) 
     <div class="max-w-md w-full">
         <div class="bg-white p-8 rounded-lg shadow-2xl border border-indigo-200">
             <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-6">
-                Acesso Restrito ao Mini-CRM
+                Login Mini-CRM
             </h2>
             
-            <?php if (isset($_GET['erro']) && $_GET['erro'] === 'falha'): ?>
-                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-400">
-                    Falha no login! E-mail ou senha incorretos.
-                </div>
-            <?php endif; ?>
 
             <form action="auth.php" method="POST" class="space-y-6">
                 <div>
@@ -45,6 +40,12 @@ if (isset($_SESSION['usuario_logado']) && $_SESSION['usuario_logado'] === true) 
                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                            placeholder="minhasenha123">
                 </div>
+
+                <?php if (isset($_GET['erro']) && $_GET['erro'] === 'falha'): ?>
+                <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg border border-red-400">
+                    Falha no login! E-mail ou senha incorretos.
+                </div>
+                <?php endif; ?>
                 
                 <button type="submit" 
                         class="w-full flex justify-center py-2 px-4 border border-transparent 

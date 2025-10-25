@@ -1,4 +1,23 @@
 <?php
+
+//PROTEÇÃO DA PÁGINA PRINCIPAL COM SISTEMA DE LOGIN
+
+//Inicia o sistema da sessão do PHP.
+session_start();
+
+//Verificação de autenticação
+//Verifica se a váriavel de sessão "usuario_logado" existe e é verdadeira
+if (!isset($_SESSION['usuario_logado']) || $_SESSION['usuario_logado'] !== true) {
+    //Se o usuário não estiver logado, redireciona para a página de login
+    header("Location: login.php");
+    exit; //Termina a execução para que o conteúdo da página não seja carregado.
+}
+
+//Acesso concedido
+$nome_usuario = $_SESSION['usuario_nome'] ?? 'Usuário';
+
+
+
 // 1. INCLUSÃO DO CONTROLADOR: Precisamos dele para a função listarClientes()
 require_once 'clientes.php';
 
@@ -24,44 +43,13 @@ $clientes = listarClientes();
             Gestão de Clientes (CRUD PHP)
         </h1>
 
-        <?php
-        // Bloco de Mensagens de Feedback
-        if (isset($_GET['status'])) {
-            $status = $_GET['status'];
-            $message = '';
-            $class = '';
-
-            // Mensagens de SUCESSO
-            if ($status === 'updated') {
-                $message = "Sucesso! O cliente foi atualizado com sucesso.";
-                $class = "bg-green-100 border-green-400 text-green-700";
-            } elseif ($status === 'deleted') {
-                $message = "Sucesso! O cliente foi excluído permanentemente.";
-                $class = "bg-red-100 border-red-400 text-red-700";
-            } elseif ($status === 'success') {
-                $message = "Sucesso! Novo cliente cadastrado com êxito.";
-                $class = "bg-blue-100 border-blue-400 text-blue-700";
-            }
-
-            // Mensagens de ERRO
-            elseif ($status === 'update_error_duplicate_email') {
-                $message = "Falha na Edição: O e-mail que você tentou usar já está cadastrado em outro cliente. E-mail deve ser único.";
-                $class = "bg-yellow-100 border-yellow-400 text-yellow-700";
-            } elseif (strpos($status, 'error') !== false) {
-                $message = "Ocorreu um erro na operação. Por favor, tente novamente ou contate o suporte.";
-                $class = "bg-red-100 border-red-400 text-red-700";
-            }
-
-            if ($message): // Se houver mensagem para exibir
-        ?>
-                <div id="feedback-message" class="p-4 mb-4 border-l-4 <?= $class ?> rounded-md" role="alert">
-                    <p class="font-bold">Aviso do Sistema</p>
-                    <p><?= htmlspecialchars($message) ?></p>
-                </div>
-        <?php
-            endif;
-        }
-        ?>
+        <nav class="flex items-center space-x-4">
+            <span class="text-sm text-gray-600">Olá, <?= htmlspecialchars($nome_usuario) ?></span>
+            <a href="logout.php"
+                class="py-1 px-3 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition">
+                Sair (Logout)
+            </a>
+        </nav>
 
         <section class="bg-white shadow-lg rounded-xl p-6 mb-10 border border-indigo-200">
             <h2 class="text-2xl font-semibold text-indigo-600 mb-6 border-b pb-2">

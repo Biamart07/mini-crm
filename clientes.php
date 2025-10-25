@@ -55,8 +55,8 @@ function criarCliente() {
 
         // 6. SUCESSO E REDIRECIONAMENTO (PADRÃO PRG)
         // Redireciona de volta para a página principal. 
-        // header("Location: index.php?status=success");
-        header("Location: index.php");
+        header("Location: index.php?status=success");
+        //header("Location: gerar_senha.php");
         exit;
     } catch (\PDOException $e) {
         // 7. TRATAMENTO DE ERRO: Útil para erros como EMAIL DUPLICADO (UNIQUE KEY)

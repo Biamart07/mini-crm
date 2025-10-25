@@ -1,21 +1,21 @@
 <?php
 
-// 1. Conexão com o Banco de Dados
+// Conexão com o Banco de Dados
 // Sem este arquivo, não temos o objeto $pdo para salvar os dados.
 
 require_once 'db_config.php';
 
 
-// ----------------------------------------------------
+
 // Função principal para criar um novo cliente (CREATE)
-// ----------------------------------------------------
+
 
 function criarCliente() {
     global $pdo; // Torna o objeto de conexão $pdo acessível dentro da função
 
-    // ===================================
-    // 4. COLETA E SANEAMENTO DOS DADOS
-    // ===================================
+  
+    // COLETA E SANEAMENTO DOS DADOS
+  
 
     // Boa Prática: usar filter_input para obter e limpar os dados de uma só vez.
     $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -33,9 +33,9 @@ function criarCliente() {
         die("Erro: O formato do e-mail é inválido.");
     }
 
-    // ===================================
-    // 5. INSERÇÃO SEGURA NO BANCO (PREPARED STATEMENT)
-    // ===================================
+    
+    // INSERÇÃO SEGURA NO BANCO (PREPARED STATEMENT)
+    
 
     try {
         // SQL com placeholders nomeados (:nome, :email, :telefone)
@@ -69,9 +69,9 @@ function criarCliente() {
     }
 }
 
-// ----------------------------------------------------
+
 // Função principal para listar todos os clientes (READ)
-// ----------------------------------------------------
+
 function listarClientes() {
 
     global $pdo; // Acessa o objeto de conexão PDO
@@ -96,9 +96,9 @@ function listarClientes() {
 
 }
 
-// ----------------------------------------------------
+
 // Função para deletar um cliente (DELETE)
-// ----------------------------------------------------
+
 function deletarCliente($id) {
     global $pdo;
 
@@ -119,9 +119,9 @@ function deletarCliente($id) {
     }
 }
 
-// ----------------------------------------------------
+
 //Função para buscar um cliente pelo ID (Utilizada para carregar o modal de edição)
-// ----------------------------------------------------
+
 function buscarClientePorId($id) {
     global $pdo;
 
@@ -137,9 +137,9 @@ function buscarClientePorId($id) {
     }
 }
 
-// ----------------------------------------------------
+
 // Função para atualizar um cliente (UPDATE)
-// ----------------------------------------------------
+
 function atualizarCliente() {
     global $pdo;
 
@@ -191,9 +191,9 @@ function atualizarCliente() {
     }
 }
 
-// ====================================================
+
 // CONTROLADOR PRINCIPAL: Processa as Requisições
-// ====================================================
+
 
 // 1. Processa Requisições POST (Criação e Edição)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -215,9 +215,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // 2. Processa Requisições GET
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['acao'])) {
     
-    // ----------------------------------------------------
+   
     // Lógica 1: DELETAR
-    // ----------------------------------------------------
+
     if ($_GET['acao'] === 'deletar') {
         $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
         if ($id && deletarCliente($id)) {
@@ -230,9 +230,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['acao'])) {
         }
     }
 
-    // ----------------------------------------------------
+
     // Lógica 2: BUSCAR DADOS PARA EDIÇÃO
-    // ----------------------------------------------------
+    
     if ($_GET['acao'] === 'buscar') {
         // 🔑 ESSENCIAL: Diz ao navegador que a resposta é um objeto de dados (JSON)
         header('Content-Type: application/json');

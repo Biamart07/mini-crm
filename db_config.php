@@ -6,7 +6,7 @@ $db = 'mini_crm'; // O nome do banco que criado no phpmyadmin
 $user = 'root'; // Usuário padrão do XAMPP para MySQL
 $pass = ''; // Senha padrão do XAMPP para MySQL
 
-// 🔑 Boa Prática: O charset é crucial para suportar acentuação (utf8mb4)
+// Boa Prática: O charset é crucial para suportar acentuação (utf8mb4)
 $charset = 'utf8mb4';
 
 // Data Source Name (DSN) - String de conexão
@@ -33,12 +33,12 @@ try {
 } catch (\PDOException $e) {
     // Se a conexão falhar (ex: MySQL não está rodando no XAMPP)
      
-     // 🛑 MODO DE DESENVOLVIMENTO: 
-     // A linha abaixo exibe o erro completo, o que é útil para você, Beatriz, em desenvolvimento.
-     // Em um projeto real, NUNCA mostre isso para o usuário final, apenas registre em um log!
+    
+     // A linha abaixo exibe o erro completo, útil para desenvolvimento.
+     // Em um projeto real, NUNCA mostrar isso para o usuário final, apenas registrar em um log!
      echo "Erro de Conexão com o Banco de Dados: ";
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
      
-     // Em um sistema real, você faria apenas:
+     // Em um sistema real:
      // die("Erro no servidor. Tente novamente mais tarde.");
 }

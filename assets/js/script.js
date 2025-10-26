@@ -132,3 +132,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+
+//Lógica para Dark Mode
+
+const html = document.documentElement;
+const themeToggle = document.getElementById('theme-toggle');
+const sunIcon = document.getElementById('sun-icon');
+const moonIcon = document.getElementById('moon-icon');
+
+// Função para aplicar o tema e alternar ícones
+const switchTheme = (isDark) => {
+    if (isDark) {
+        html.classList.add('dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+        localStorage.setItem('theme', 'dark');
+    } else {
+        html.classList.remove('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        localStorage.setItem('theme', 'light');
+    }
+};
+
+// 1. Aplicar o tema na carga (Leitura do localStorage)
+const currentTheme = localStorage.getItem('theme');
+
+// Verifica a preferência do sistema se não houver no localStorage (Melhor Prática!)
+if (currentTheme === 'dark' || (!currentTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    switchTheme(true);
+} else {
+    switchTheme(false);
+}
+
+// 2. Listener do botão de toggle
+if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+        // Pega o estado atual antes de alternar
+        const isDark = html.classList.contains('dark');
+        // Alterna para o estado oposto e salva
+        switchTheme(!isDark);
+    });
+}

@@ -25,6 +25,10 @@ Este projeto incorpora as seguintes melhores práticas, que são essenciais para
 
 ## 🎨 Funcionalidades Front-End (UX/Design)
 
+* **Modo Escuro (Dark Mode) Automático e Manual:**
+    * **Detecção Automática:** A interface detecta a preferência de tema (claro/escuro) do sistema operacional do usuário na primeira visita.
+    * **Alternância Manual:** Um botão (ícone de sol/lua) permite ao usuário alternar entre os temas a qualquer momento.
+    * **Persistência:** A escolha do usuário é salva no `localStorage` do navegador, mantendo o tema selecionado em visitas futuras e entre a tela de login e a página principal.
 * **CRUD Completo e Fluido:** Implementação das operações C.R.U.D.
 * **Edição (Update) com Modal AJAX:** O preenchimento do formulário de edição no Modal é feito de forma assíncrona via **Fetch API (JSON)**, proporcionando uma experiência de usuário sem recarregamento de página.
 * **Design Responsivo e Navbar:**
@@ -84,4 +88,3 @@ Este projeto incorpora as seguintes melhores práticas, que são essenciais para
 1.  Coloque a pasta `mini-crm` no diretório `htdocs` do seu servidor local.
 2.  Acesse: `http://localhost/mini-crm/login.php`
 3.  Faça login com o e-mail e senha do usuário que você criou (a senha que você usou para gerar o hash).
-
